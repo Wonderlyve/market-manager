@@ -8,19 +8,9 @@ interface StatCardProps {
   description?: string;
   icon: LucideIcon;
   iconColor?: string;
-  change?: string;
-  trend?: "up" | "down" | "neutral";
 }
 
-export function StatCard({ 
-  title, 
-  value, 
-  description, 
-  icon: Icon, 
-  iconColor = "text-supermarket-blue",
-  change,
-  trend
-}: StatCardProps) {
+export function StatCard({ title, value, description, icon: Icon, iconColor = "text-supermarket-blue" }: StatCardProps) {
   return (
     <Card className="shadow-sm hover:shadow-md transition-shadow">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -29,17 +19,7 @@ export function StatCard({
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
-        {(change || description) && (
-          <p className={`text-xs mt-1 ${
-            trend === "up" 
-              ? "text-green-600" 
-              : trend === "down" 
-              ? "text-red-600" 
-              : "text-muted-foreground"
-          }`}>
-            {change || description}
-          </p>
-        )}
+        {description && <p className="text-xs text-muted-foreground mt-1">{description}</p>}
       </CardContent>
     </Card>
   );

@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export interface Alert {
+interface Alert {
   id: string;
   message: string;
   type: 'warning' | 'danger' | 'info';
