@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Client, ClientTable } from "@/components/clients/ClientTable";
 import { ClientDetails } from "@/components/clients/ClientDetails";
+import { ClientRegistrationDialog } from "@/components/clients/ClientRegistrationDialog";
 
 // Données fictives
 const initialClients: Client[] = [
@@ -86,9 +87,12 @@ const Clients = () => {
   
   return (
     <div className="container mx-auto p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Clients</h1>
-        <p className="text-gray-500">Gérer les informations client et suivre leurs achats et points de fidélité</p>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Clients</h1>
+          <p className="text-gray-500">Gérer les informations client et suivre leurs achats et points de fidélité</p>
+        </div>
+        <ClientRegistrationDialog />
       </div>
       
       <div className="grid gap-6 lg:grid-cols-3">
