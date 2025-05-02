@@ -12,6 +12,7 @@ export interface Client {
   cardId: string;
   monthlySpendings: number;
   remainingBudget: number;
+  loyaltyPoints: number;
 }
 
 interface ClientTableProps {
@@ -48,7 +49,7 @@ export function ClientTable({ clients, onSelectClient }: ClientTableProps) {
               <TableHead>Email</TableHead>
               <TableHead>N° Carte</TableHead>
               <TableHead>Dépenses Mensuelles</TableHead>
-              <TableHead>Budget Restant</TableHead>
+              <TableHead>Points Fidélité</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -77,14 +78,8 @@ export function ClientTable({ clients, onSelectClient }: ClientTableProps) {
                   </TableCell>
                   <TableCell>{client.monthlySpendings.toFixed(2)} €</TableCell>
                   <TableCell>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      client.remainingBudget <= 50 
-                        ? 'bg-red-100 text-red-800' 
-                        : client.remainingBudget <= 100 
-                        ? 'bg-amber-100 text-amber-800' 
-                        : 'bg-green-100 text-green-800'
-                    }`}>
-                      {client.remainingBudget.toFixed(2)} €
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                      {client.loyaltyPoints} pts
                     </span>
                   </TableCell>
                   <TableCell className="text-right">

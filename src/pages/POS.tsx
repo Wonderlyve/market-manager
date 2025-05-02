@@ -14,7 +14,8 @@ const initialClients: Client[] = [
     email: "jean.dupont@example.com",
     cardId: "CL-1001",
     monthlySpendings: 180.50,
-    remainingBudget: 119.50
+    remainingBudget: 119.50,
+    loyaltyPoints: 120
   },
   {
     id: "2",
@@ -22,7 +23,8 @@ const initialClients: Client[] = [
     email: "marie.lambert@example.com",
     cardId: "CL-1002",
     monthlySpendings: 75.20,
-    remainingBudget: 224.80
+    remainingBudget: 224.80,
+    loyaltyPoints: 45
   },
   {
     id: "3",
@@ -30,7 +32,8 @@ const initialClients: Client[] = [
     email: "theo.martin@example.com",
     cardId: "CL-1003",
     monthlySpendings: 290.15,
-    remainingBudget: 9.85
+    remainingBudget: 9.85,
+    loyaltyPoints: 290
   }
 ];
 
@@ -80,7 +83,7 @@ interface CartItem {
 const POS = () => {
   const [activeClient, setActiveClient] = useState<Client | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [clients] = useState<Client[]>(initialClients);
+  const [clients, setClients] = useState<Client[]>(initialClients);
   const [articles] = useState<Article[]>(initialArticles);
   const { toast } = useToast();
   
@@ -154,8 +157,42 @@ const POS = () => {
   };
   
   const handleCheckout = () => {
-    // In a real application, this would send data to the server
-    // and update stock, client spending, etc.
+    if (!activeClient) return;
+    
+    // Calculate total
+    const total = cartItems.reduce((sum, item) => sum + item.article.price * item.quantity, 0);
+    
+    // Calculate loyalty points (1 point for each euro spent)
+    const earnedPoints = Math.floor(total);
+    
+    // Update client data
+    const updatedClients = clients.map(client => {
+      if (client.id === activeClient.id) {
+        return {
+          ...client,
+          monthlySpendings: client.monthlySpendings + total,
+          remainingBudget: client.remainingBudget - total,
+          loyaltyPoints: client.loyaltyPoints + earnedPoints
+        };
+      }
+      return client;
+    });
+    
+    setClients(updatedClients);
+    
+    // Update active client
+    const updatedActiveClient = updatedClients.find(client => client.id === activeClient.id);
+    if (updatedActiveClient) {
+      setActiveClient(updatedActiveClient);
+    }
+    
+    // Show toast with earned points
+    toast({
+      title: "Points de fidélité",
+      description: `Le client a gagné ${earnedPoints} points de fidélité !`,
+    });
+    
+    // Clear cart
     setCartItems([]);
   };
   

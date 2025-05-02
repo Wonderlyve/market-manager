@@ -1,11 +1,10 @@
 
-import { ShoppingCart, Trash } from "lucide-react";
+import { GiftIcon, ShoppingCart, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Client } from "../clients/ClientTable";
 import { Article } from "../articles/ArticleTable";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { toast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -39,6 +38,9 @@ export function PosCart({
     (sum, item) => sum + item.article.price * item.quantity,
     0
   );
+
+  // Calculer les points de fidélité qui seront gagnés (1 point par euro)
+  const loyaltyPointsToEarn = Math.floor(total);
   
   const handleCheckout = () => {
     if (!client) {
@@ -154,11 +156,26 @@ export function PosCart({
           </div>
           
           {client && (
-            <div className="flex justify-between text-sm mb-4">
-              <span className="text-muted-foreground">Budget restant</span>
-              <span className={client.remainingBudget < total ? "text-destructive font-medium" : ""}>
-                {client.remainingBudget.toFixed(2)} €
-              </span>
+            <div className="space-y-2 mb-4">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Budget restant</span>
+                <span className={client.remainingBudget < total ? "text-destructive font-medium" : ""}>
+                  {client.remainingBudget.toFixed(2)} €
+                </span>
+              </div>
+              
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground flex items-center gap-1">
+                  <GiftIcon className="h-3 w-3 text-amber-600" />
+                  Points de fidélité
+                </span>
+                <div>
+                  <span className="mr-1">{client.loyaltyPoints} pts</span>
+                  {loyaltyPointsToEarn > 0 && (
+                    <span className="text-xs text-green-600">(+{loyaltyPointsToEarn})</span>
+                  )}
+                </div>
+              </div>
             </div>
           )}
           

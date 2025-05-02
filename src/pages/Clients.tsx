@@ -11,7 +11,8 @@ const initialClients: Client[] = [
     email: "jean.dupont@example.com",
     cardId: "CL-1001",
     monthlySpendings: 180.50,
-    remainingBudget: 119.50
+    remainingBudget: 119.50,
+    loyaltyPoints: 120
   },
   {
     id: "2",
@@ -19,7 +20,8 @@ const initialClients: Client[] = [
     email: "marie.lambert@example.com",
     cardId: "CL-1002",
     monthlySpendings: 75.20,
-    remainingBudget: 224.80
+    remainingBudget: 224.80,
+    loyaltyPoints: 45
   },
   {
     id: "3",
@@ -27,7 +29,8 @@ const initialClients: Client[] = [
     email: "theo.martin@example.com",
     cardId: "CL-1003",
     monthlySpendings: 290.15,
-    remainingBudget: 9.85
+    remainingBudget: 9.85,
+    loyaltyPoints: 290
   },
   {
     id: "4",
@@ -35,7 +38,8 @@ const initialClients: Client[] = [
     email: "sophie.bernard@example.com",
     cardId: "CL-1004",
     monthlySpendings: 145.30,
-    remainingBudget: 154.70
+    remainingBudget: 154.70,
+    loyaltyPoints: 85
   },
   {
     id: "5",
@@ -43,7 +47,8 @@ const initialClients: Client[] = [
     email: "lucas.petit@example.com",
     cardId: "CL-1005",
     monthlySpendings: 210.75,
-    remainingBudget: 89.25
+    remainingBudget: 89.25,
+    loyaltyPoints: 175
   }
 ];
 
@@ -83,7 +88,7 @@ const Clients = () => {
     <div className="container mx-auto p-6">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Clients</h1>
-        <p className="text-gray-500">Gérer les informations client et suivre leurs achats</p>
+        <p className="text-gray-500">Gérer les informations client et suivre leurs achats et points de fidélité</p>
       </div>
       
       <div className="grid gap-6 lg:grid-cols-3">

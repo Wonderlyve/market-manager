@@ -50,7 +50,7 @@ export function SupermarketSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="flex items-center justify-center py-6">
-        <h2 className="text-xl font-bold text-supermarket-blue">ZenithMarket</h2>
+        <h2 className="text-xl font-bold text-supermarket-blue">IdeaMarket</h2>
       </SidebarHeader>
       
       <SidebarContent className="pr-1">
@@ -81,7 +81,7 @@ export function SupermarketSidebar() {
       
       <SidebarFooter className="p-4 border-t">
         <div className="text-xs text-muted-foreground">
-          ZenithMarket Manager v1.0
+          IdeaMarket Manager v1.0
         </div>
       </SidebarFooter>
     </Sidebar>
