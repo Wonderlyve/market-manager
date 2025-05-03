@@ -13,6 +13,12 @@ export interface Client {
   monthlySpendings: number;
   remainingBudget: number;
   loyaltyPoints: number;
+  // Nouveaux champs
+  firstName?: string;
+  lastName?: string;
+  civilStatus?: 'single' | 'married' | 'divorced' | 'widowed';
+  gender?: 'male' | 'female' | 'other';
+  address?: string;
 }
 
 interface ClientTableProps {
